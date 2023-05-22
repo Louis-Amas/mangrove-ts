@@ -53,6 +53,17 @@ jobs:
       env:
         INPUT_REVISION: ${{ inputs.revision }}
 
+    - name: setup git
+      run: |
+        echo "INPUT_COMMIT_USER_NAME: ${INPUT_COMMIT_USER_NAME}";
+        git config --global user.name  "${INPUT_COMMIT_USER_NAME}";
+        echo "INPUT_COMMIT_USER_EMAIL: ${INPUT_COMMIT_USER_EMAIL}";
+        git config --global user.email ${INPUT_COMMIT_USER_EMAIL}
+
+      env:
+        INPUT_COMMIT_USER_NAME:  github-actions-bot
+        INPUT_COMMIT_USER_EMAIL: github-actions-bot@users.noreply.github.com
+
     - name: git version
       run: |
         git status
@@ -102,13 +113,4 @@ jobs:
       env:
         INPUT_REVISION: ${{ inputs.revision }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-    - name: setup git
-      run: |
-        echo "INPUT_COMMIT_USER_NAME: ${INPUT_COMMIT_USER_NAME}";
-        git config --global user.name  "${INPUT_COMMIT_USER_NAME}";
-        echo "INPUT_COMMIT_USER_EMAIL: ${INPUT_COMMIT_USER_EMAIL}";
-        git config --global user.email ${INPUT_COMMIT_USER_EMAIL}
 
-      env:
-        INPUT_COMMIT_USER_NAME:  github-actions-bot
-        INPUT_COMMIT_USER_EMAIL: github-actions-bot@users.noreply.github.com
